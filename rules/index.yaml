@@ -24,6 +24,11 @@ categories:
   - id: workflow
     name: 워크플로우 규칙
     description: Git, CI/CD 관련 규칙
+    ruleCount: 2
+
+  - id: deploy
+    name: 배포 규칙
+    description: 플러그인 및 패키지 배포 규칙
     ruleCount: 1
 
 # 태그 목록
@@ -34,6 +39,12 @@ tags:
   - formatting
   - git
   - commit
+  - claude-code
+  - plugin
+  - npm
+  - deployment
+  - permissions
+  - settings
 
 # 규칙 참조
 rules:
@@ -51,3 +62,13 @@ rules:
     file: workflow/git.yaml
     category: workflow
     tags: [git, commit]
+
+  - id: permissions-001
+    file: workflow/permissions.yaml
+    category: workflow
+    tags: [permissions, claude-code, settings]
+
+  - id: deploy-claude-plugin-001
+    file: deploy/claude-plugin.yaml
+    category: deploy
+    tags: [claude-code, plugin, npm, deployment]

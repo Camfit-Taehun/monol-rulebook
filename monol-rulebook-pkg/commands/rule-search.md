@@ -1,5 +1,5 @@
 ---
-description: 규칙 검색
+description: 규칙 검색 (한글: 규칙검색, 룰검색, 규칙찾기)
 argument-hint: "<query> [--tags <tags>] [--category <cat>]"
 allowed-tools: [Read, Glob, Grep]
 ---

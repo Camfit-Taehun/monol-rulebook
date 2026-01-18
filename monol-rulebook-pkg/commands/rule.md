@@ -1,5 +1,5 @@
 ---
-description: 규칙 조회 및 관리
+description: 규칙 조회 및 관리 (한글: 규칙, 룰, 규칙보기, 규칙목록)
 argument-hint: "[id | category | list | stats]"
 allowed-tools: [Read, Glob, Grep]
 ---

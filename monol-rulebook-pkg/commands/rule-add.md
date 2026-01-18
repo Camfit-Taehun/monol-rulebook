@@ -1,5 +1,5 @@
 ---
-description: 대화형 규칙 추가
+description: 대화형 규칙 추가 (한글: 규칙추가, 룰추가, 새규칙, 규칙만들기)
 argument-hint: "[--quick] [name]"
 allowed-tools: [Read, Write, Edit, AskUserQuestion, Glob]
 ---
@@ -19,6 +19,29 @@ const search = new RuleSearch(existingRules.rules);
 ```
 
 ## 워크플로우
+
+### 0. 초기화 (rules/ 없으면 자동 생성)
+
+```typescript
+const rulesDir = path.join(workspacePath, 'rules');
+if (!fs.existsSync(rulesDir)) {
+  // 디렉토리 생성
+  fs.mkdirSync(rulesDir, { recursive: true });
+
+  // 기본 설정 파일 생성
+  const config = `# Rulebook Configuration
+inherit:
+  global: true  # ~/.config/monol/rules/ 상속
+
+metadata:
+  scope: project
+  description: "프로젝트 규칙"
+`;
+  fs.writeFileSync(path.join(rulesDir, '.rulebook-config.yaml'), config);
+
+  console.log('📁 rules/ 디렉토리가 생성되었습니다.');
+}
+```
 
 ### 1. 시작 메시지
 

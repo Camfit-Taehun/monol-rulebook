@@ -1,5 +1,5 @@
 ---
-description: 규칙 변경 이력 조회 및 버전 관리
+description: 규칙 변경 이력 조회 및 버전 관리 (한글: 규칙이력, 룰이력, 규칙히스토리)
 argument-hint: "<rule-id> [--diff <v1> <v2>]"
 allowed-tools: [Read, Glob, Grep]
 ---

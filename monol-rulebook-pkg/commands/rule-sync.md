@@ -1,5 +1,5 @@
 ---
-description: 플랫폼 규칙 동기화
+description: 플랫폼 규칙 동기화 (한글: 규칙동기화, 룰동기화, 규칙내보내기, 규칙싱크)
 argument-hint: "<platform> [--push | --pull | --diff]"
 allowed-tools: [Read, Write, Edit, Glob, Bash]
 ---
