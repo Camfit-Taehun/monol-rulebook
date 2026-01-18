@@ -1,0 +1,12 @@
+{
+  "name": "monol-rulebook",
+  "description": "규칙 관리 및 플랫폼 동기화",
+  "plugins": [
+    {
+      "name": "monol-rulebook",
+      "version": "0.1.6",
+      "description": "YAML 기반 코딩 규칙을 Cursor/Claude Code에 동기화",
+      "path": "."
+    }
+  ]
+}
