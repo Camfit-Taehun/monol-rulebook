@@ -1,0 +1,53 @@
+# Rulebook Index
+# 규칙 인덱스 파일 - 자동 생성됨
+
+metadata:
+  version: "1.0.0"
+  lastUpdated: "2025-01-18T00:00:00Z"
+  scope: package
+  description: "Monol Rulebook 예시 규칙"
+
+# 카테고리 목록
+categories:
+  - id: code
+    name: 코드 규칙
+    description: 코딩 스타일 및 패턴
+    ruleCount: 2
+    subcategories:
+      - id: code/style
+        name: 스타일
+        ruleCount: 1
+      - id: code/naming
+        name: 네이밍
+        ruleCount: 1
+
+  - id: workflow
+    name: 워크플로우 규칙
+    description: Git, CI/CD 관련 규칙
+    ruleCount: 1
+
+# 태그 목록
+tags:
+  - naming
+  - variables
+  - style
+  - formatting
+  - git
+  - commit
+
+# 규칙 참조
+rules:
+  - id: style-001
+    file: code/style.yaml
+    category: code/style
+    tags: [style, formatting]
+
+  - id: naming-001
+    file: code/naming.yaml
+    category: code/naming
+    tags: [naming, variables]
+
+  - id: git-001
+    file: workflow/git.yaml
+    category: workflow
+    tags: [git, commit]
