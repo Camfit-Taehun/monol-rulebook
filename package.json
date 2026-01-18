@@ -1,6 +1,6 @@
 {
   "name": "monol-rulebook",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "로컬 규칙을 Cursor/Claude Code에 동기화하는 CLI 도구",
   "type": "module",
   "main": "dist/foundations/logic/lib/index.js",
@@ -13,7 +13,8 @@
     "rules",
     "scripts",
     "plugin.json",
-    "foundations"
+    "foundations",
+    "session-templates"
   ],
   "scripts": {
     "build": "tsc",
