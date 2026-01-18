@@ -1,6 +1,6 @@
 {
   "name": "monol-rulebook",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "로컬 규칙을 Cursor/Claude Code에 동기화하는 CLI 도구",
   "type": "module",
   "main": "dist/foundations/logic/lib/index.js",
@@ -17,7 +17,6 @@
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "prepare": "npm run build",
-    "postinstall": "./scripts/install-hooks.sh",
     "typecheck": "tsc --noEmit",
     "sync": "node dist/bin/sync.js all",
     "sync:cursor": "node dist/bin/sync.js cursor",
