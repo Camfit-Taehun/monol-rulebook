@@ -338,8 +338,238 @@ platforms:
 💡 커밋하려면: /commit -m "chore: sync rulebook"
 ```
 
+---
+
+## 원격 동기화 (Remote Sync)
+
+### 9. 팀 서버와 동기화
+
+```
+/rule-sync --remote push
+```
+
+**출력:**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 원격 동기화: Push
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+팀: Design System
+방향: 로컬 → 서버
+
+진행 중...
+  [████████████████████████████████] 100%
+
+✅ 동기화 완료!
+
+  푸시된 규칙: 5개
+  - naming-001 (새로 추가)
+  - style-001 (업데이트)
+  - git-001 (업데이트)
+  - planning-001 (새로 추가)
+  - test-001 (새로 추가)
+
+  충돌: 없음
+  오프라인 큐: 0개
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 팀 규칙 확인: /rule-team rules
+```
+
+### 10. 서버에서 규칙 가져오기
+
+```
+/rule-sync --remote pull
+```
+
+**출력:**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 원격 동기화: Pull
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+팀: Design System
+방향: 서버 → 로컬
+
+진행 중...
+  [████████████████████████████████] 100%
+
+✅ 동기화 완료!
+
+  가져온 규칙: 8개
+  - security-001 (새로 추가)
+  - api-001 (새로 추가)
+  - error-001 (업데이트)
+  ... 5개 더
+
+  저장 위치: rules/team/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 가져온 규칙 확인: /rule list --source team
+```
+
+### 11. 양방향 원격 동기화
+
+```
+/rule-sync --remote both
+```
+
+**충돌 발생 시:**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ 충돌 발견 (2개)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1] naming-001 (동시 수정)
+    로컬 버전: 1.2.0 (수정: 2025-01-22 10:00)
+    원격 버전: 1.3.0 (수정: 2025-01-22 11:00)
+
+    변경 사항:
+      description:
+        로컬: "변수명은 camelCase..."
+        원격: "변수명, 함수명에 대한..."
+
+[2] style-001 (동시 수정)
+    ...
+
+어떻게 해결하시겠습니까?
+  [1] 로컬 우선 (내 변경사항 유지)
+  [2] 원격 우선 (서버 변경사항 적용)
+  [3] 자동 머지 시도
+  [4] 수동 해결
+```
+
+### 12. 델타 동기화 (변경분만)
+
+```
+/rule-sync --remote pull --since "2025-01-20"
+```
+
+마지막 동기화 이후 변경된 규칙만 가져옵니다.
+
+### 13. 오프라인 상태 처리
+
+오프라인 상태에서 push 시도:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📴 오프라인 모드
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+서버에 연결할 수 없습니다.
+
+변경사항이 오프라인 큐에 저장되었습니다:
+  - naming-001 (push)
+  - style-001 (push)
+
+💡 큐 상태 확인: /rule-sync --remote queue
+💡 온라인 복귀 시 자동 동기화됩니다.
+```
+
+### 14. 오프라인 큐 관리
+
+```
+/rule-sync --remote queue
+```
+
+**출력:**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 오프라인 큐
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+대기 중인 작업: 3개
+
+  [1] push: naming-001
+      추가 시간: 2025-01-22 10:30:00
+      재시도: 0회
+
+  [2] push: style-001
+      추가 시간: 2025-01-22 10:30:05
+      재시도: 1회 (네트워크 오류)
+
+  [3] delete: old-rule-001
+      추가 시간: 2025-01-22 10:31:00
+      재시도: 0회
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 수동 재시도: /rule-sync --remote retry
+💡 큐 비우기: /rule-sync --remote clear-queue
+```
+
+## 원격 동기화 옵션
+
+| 옵션 | 설명 |
+|------|------|
+| `--remote push` | 로컬 → 서버 동기화 |
+| `--remote pull` | 서버 → 로컬 동기화 |
+| `--remote both` | 양방향 동기화 |
+| `--remote queue` | 오프라인 큐 확인 |
+| `--remote retry` | 큐 재시도 |
+| `--remote clear-queue` | 큐 비우기 |
+| `--since <date>` | 특정 날짜 이후 변경분만 |
+| `--conflict <strategy>` | 충돌 해결 전략 (local/remote/auto/manual) |
+
+## 원격 동기화 라이브러리 연동
+
+```typescript
+import {
+  AuthManager,
+  getAuthManager,
+  RemoteSyncService,
+  getRemoteSyncService,
+  ConflictResolver,
+} from './lib';
+
+async function remoteSync(direction: 'push' | 'pull' | 'both') {
+  const auth = getAuthManager();
+  if (!auth.isAuthenticated()) {
+    console.log('⚠️ 로그인이 필요합니다.');
+    return;
+  }
+
+  const syncService = getRemoteSyncService({
+    authManager: auth,
+    serverUrl: process.env.MONOL_SERVER_URL,
+  });
+
+  // 진행 상태 표시
+  syncService.onProgress((progress) => {
+    console.log(`[${progress.phase}] ${progress.current}/${progress.total}`);
+  });
+
+  const manager = new RulebookManager(workspacePath);
+  const loaded = await manager.loadRulesForPath(workspacePath);
+
+  if (direction === 'push' || direction === 'both') {
+    const result = await syncService.pushRules(loaded.rules);
+    console.log(`푸시 완료: ${result.pushed?.count}개`);
+
+    if (result.conflicts?.length) {
+      const resolver = new ConflictResolver();
+      console.log(resolver.formatConflicts(result.conflicts));
+    }
+  }
+
+  if (direction === 'pull' || direction === 'both') {
+    const result = await syncService.pullRules();
+    console.log(`풀 완료: ${result.pulled?.count}개`);
+  }
+}
+```
+
 ## 관련 커맨드
 
 - `/rule` - 규칙 조회
 - `/rule-add` - 규칙 추가
 - `/rule-search` - 규칙 검색
+- `/rule-team` - 팀 관리
+- `/rule-publish` - 규칙 발행
+- `/rule-adopt` - 규칙 채택
