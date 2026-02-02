@@ -86,6 +86,21 @@ export {
 export { CursorAdapter } from './adapters/cursor-adapter.js';
 export { ClaudeAdapter } from './adapters/claude-adapter.js';
 
+// Rule Sharing (v0.3.x)
+export {
+  RuleSharingService,
+  getRuleSharingService,
+  quickExportRules,
+  quickImportRules,
+  type RulePackage,
+  type ShareUrl,
+  type AdoptionRecord,
+  type RuleSharingConfig,
+  type ImportOptions,
+  type ExportOptions,
+  type ImportResult,
+} from './rule-sharing.js';
+
 // Default export (convenience)
 import RulebookManagerDefault from './rulebook-manager.js';
 export default RulebookManagerDefault;
